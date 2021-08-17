@@ -3,8 +3,9 @@
 #include <memory>
 #include <string>
 #include <fstream>
+#include <vector>
+#include <map>
 #include <filesystem>
-#include <algorithm>
 
 [[maybe_unused]] Logs::Logs() {
     this->_separator = static_cast<char>(std::filesystem::path::preferred_separator); // Установка файлового разделителя
@@ -15,6 +16,19 @@
     this->_separator = static_cast<char>(std::filesystem::path::preferred_separator); // Установка файлового разделителя
     this->_current_path = this->find_path();                                          // Установка корневого пути
     this->set_path(std::move(dir));
+}
+
+[[maybe_unused]] Logs::Logs(const std::string &dir, unsigned short mode) {
+    this->_separator = static_cast<char>(std::filesystem::path::preferred_separator); // Установка файлового разделителя
+    this->_current_path = this->find_path();                                          // Установка корневого пути
+    this->set_path(std::move(dir));
+    this->set_mode(mode);
+}
+
+[[maybe_unused]] Logs::Logs(unsigned short mode) {
+    this->_separator = static_cast<char>(std::filesystem::path::preferred_separator); // Установка файлового разделителя
+    this->_current_path = this->find_path();                                          // Установка корневого пути
+    this->set_mode(mode);
 }
 
 [[maybe_unused]] Logs::Logs(Logs &test) {
@@ -61,4 +75,39 @@ std::string Logs::find_path(){
 
 [[maybe_unused]] std::string Logs::get_current_path(){
     return this->_current_path;
+}
+
+[[maybe_unused]] void Logs::set_mode(unsigned short int mode){
+    this->_mode = mode;
+}
+
+[[maybe_unused]] unsigned short int Logs::get_mode(){
+    return this->_mode;
+}
+
+[[maybe_unused]] bool Logs::add_stream(const std::string& name) {
+    std::vector<std::string> names = this->get_streams();
+    for (std::string &i : names) {
+        if (i == name){
+            std::cout << "-- Stream with name:" << name << " is exist" << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
+[[maybe_unused]] std::vector<std::string> Logs::get_streams() {
+    const unsigned long int size = static_cast<unsigned long int>(this->_logout.size());
+    std::vector<std::string> names;
+    names.resize(size);
+    if (this->_logout.empty()) {
+        return names;
+    }
+    else {
+        std::map<std::string, std::ifstream>::iterator iter{};
+        for (iter = this->_logout.begin(); iter != this->_logout.end(); iter++){
+            names.push_back((*iter).first);
+        }
+        return names;
+    }
 }
