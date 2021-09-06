@@ -22,7 +22,7 @@ find_package(Threads REQUIRED)
 set(SOURCE loglib.cpp)
 #---------------------------------------------------------------------#
 #-----------------------------Add library ----------------------------#
-add_library(${LIB_NAME} SHARED
+add_library(${LIB_NAME}
         ${SOURCE}
         ${HEADER_LIST})
 #---------------------------------------------------------------------#

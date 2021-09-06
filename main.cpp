@@ -2,17 +2,23 @@
 #include <loglib.hpp>
 #include <vector>
 
-struct Any{
-    static int get_i() {
-        return i;
-    }
-private:
-    static const int i = 10;
-};
 
 
 int main() {
     std::cout << "Hello, logs!" << std::endl;
-    std::cout << Any::get_i() << std::endl;
+    log::Logger::add_message(log::category::ALARM, "Whats wrong!");
+    log::Logger::add_message(log::category::ALARM, "Whats wrong!");
+    log::Logger::add_message(log::category::ALARM, "Whats wrong!");
+    log::Logger::add_message(log::category::WARNING, "AI AI AI AI AI!");
+    log::Logger::add_message(log::category::WARNING, "AI AI AI AI AI!");
+    log::Logger::add_message(log::category::WARNING, "AI AI AI AI AI!");
+    log::Logger::add_message(log::category::WARNING, "AI AI AI AI AI!");
+    log::Logger::add_message(log::category::WARNING, "AI AI AI AI AI!");
+    log::Logger::add_message(log::category::ALARM, "Whats wrong!");
+    log::Logger::add_message(log::category::INFO, "LOG OPERATION!");
+    log::Logger::add_message(log::category::INFO, "LOG OPERATION!");
+    log::Logger::add_message(log::category::INFO, "LOG OPERATION!");
+    log::Logger::add_message(log::category::INFO, "LOG OPERATION!");
+    log::Logger::show();
     return 0;
 }
