@@ -12,7 +12,8 @@ message("-- BINARY DIR: ${CMAKE_BINARY_DIR}")
 #---------------------------------------------------------------------#
 #---------------------------Include headers --------------------------#
 set(LIB_PATH ${PROJECT_SOURCE_DIR}/include/loglib)
-set(HEADER_LIST ${LIB_PATH}/loglib.hpp)
+set(HEADER_LIST ${LIB_PATH}/loglib.hpp
+        ${LIB_PATH}/clutil.hpp)
 #---------------------------------------------------------------------#
 #-----------------------------Find package ---------------------------#
 find_package(Threads REQUIRED)
